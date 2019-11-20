@@ -40,6 +40,9 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModaladdServidor">
             Adicionar Servidor
             </button>
+
+
+            
             <a class="btn btn-dark" role="button" href="logout.php">Log out</a>
          </div>
       </nav>
@@ -95,15 +98,25 @@
   <hr class="my-4">
   <div style="text-align: center;">
   <?php                                 
-                  $sql = "SELECT * FROM servers WHERE users_id = '{$_SESSION['id']}'";
-                  $query = mysqli_query($link, $sql) ;
-                  while($sql = mysqli_fetch_array($query)){
-                  $nome = $sql["nome"];
-                  $endereco = $sql["endereco"];
+                  $sqltes = "SELECT * FROM servers WHERE users_id = '{$_SESSION['id']}'";
+                  $query = mysqli_query($link, $sqltes) ;
+                  while($sqltes = mysqli_fetch_array($query)){
+                  $nomedoserver = $sqltes["nome"];
+                  $enderecodoserver = $sqltes["endereco"];
                   
-                  echo "<a class='btn btn-dark mrg-link btn-lg' role='button' href='http://".$endereco."'target='_blank'>".$nome."</a>";
+
+
+
+
+
+                  echo "
+                  <div class='btn btn-dark mrg-link btn-lg'>
+                  <a style='color: #fff; text-decoration: none;' role='button' href='http://".$enderecodoserver."'target='_blank'>".$nomedoserver."</a><a href='#' name='id' data-value='".$sqltes["id"]."' id='mydiv' data-toggle='modal' data-target='#Modaleditarserver'><i style='color: #fff; padding-left: 1rem;'class='align-middle far fa-1x fa-edit'></i></a>
+                  <a href='apagar-server.php?id=".$sqltes["id"]."'><i style='color: #fff;'class='align-middle fas fa-1x fa-times'></i></a>
+    </div>";
                   }
                   ?>﻿
+
 </div>
 </div>
                
@@ -184,5 +197,53 @@
       </div>
 
       
+
+<script type="text/javascript">
+  const details = document.querySelector('#mydiv');
+details.addEventListener('click', () => {
+  showMydiv(mydiv.dataset.value);
+});
+
+function showMydiv(str) {
+  document.getElementById('tabelateste').value = str;
+
+}
+</script>
+
+      <div class="modal fade" id="Modaleditarserver" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="TituloModalCentralizado">Editar Servidor</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form action="editar-server.php" method="get" name="cadastre">
+                     <div class="row">
+                        <div class="col-md-12 px-1">
+                <input type="text" class="form-control" name="iddosers" value="tabelateste" id="tabelateste" style="display: none;" readonly>
+                           <div class="form-group">
+                              <label>Nome do Servidor</label>
+                              <input type="text" class="form-control" name="nomedoserver" placeholder="Nome do Servidor" required>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-12 px-1">
+                           <div class="form-group">
+                              <label for="inputName">Endereço do Servidor</label>
+                              <input type="text" class="form-control" name="enderecodoserver" placeholder="0.0.0.0" >
+                           </div>
+                           <input type="submit" class="btn btn-primary btn-fill pull-right" value="Editar Servidor" />
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            </div>
+         </div>
+      </div>
    </body>
 </html>
