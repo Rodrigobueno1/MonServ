@@ -44,10 +44,31 @@ $update = $Config->checkUpdate();
     <div id="appname" style="padding: 8px;
     width: 400px; font-size: 25px">
         <p>MonServ - Server Monitor</p>
+        
     </div>
-
+<script>
+$(document).ready(function(){
+    $('.buttonsad').click(function(){
+        var clickBtnValue = $(this).val();
+        var ajaxurl = 'teste.php',
+        data =  {'action': clickBtnValue};
+        $.post(ajaxurl, data, function (response) {
+            // Response div goes here.
+            alert("Agora você irá receber notificações");
+        });
+    });
+});
+</script>
 
     <ul>
+    <li style="padding-top: 0.5rem; padding-right: 0.5rem; float: right;">
+    <input style="    background-color: #f9f9f9;
+    border: none;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 5px;
+    color: #595959;" type="submit" class="buttonsad" name="insert" value="Receber Notificações" />
+    </li>
     <li style="
     float: right;
 "><a href="#" class="reload" onclick="esm.reloadBlock('all');"><span class="icon-cycle"></span></a></li>
