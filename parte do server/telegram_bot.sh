@@ -1,9 +1,9 @@
 #!/bin/bash
 while true
 do
- ACCESS_TOKEN="914645769:AAHOZv0GDO0mT34P0chw32BHDzXL0Vnn6fE"
+ ACCESS_TOKEN="<token>"
  URL="https://api.telegram.org/bot$ACCESS_TOKEN/sendMessage"
- CHAT_ID="296647731" # Telegram id from /getUpdates
+ CHAT_ID="<chat_id>" # Telegram id from /getUpdates
 
  mem=$(free -m)
  mem_usage=$(echo "$mem" | awk 'NR==2{printf "%.2f%%\t\t", $3*100/$2 }')
