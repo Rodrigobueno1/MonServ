@@ -24,5 +24,5 @@ uptime=$(echo "$up" | awk -F'( |,|:)+' '{d=h=m=0; if ($7=="min") m=$6; else {if 
  Uptime: $uptime"
  PAYLOAD="chat_id=$CHAT_ID&text=$MESSAGE&disable_web_page_preview=true&parse_mode=Markdown"
  curl -s --max-time 13 --retry 3 --retry-delay 3 --retry-max-time 13 -d "$PAYLOAD" $URL > /dev/null 2>&1 &
-	sleep 30
+	sleep 30 #Tempo que cada notificacao sera recebida em segundos
 done
